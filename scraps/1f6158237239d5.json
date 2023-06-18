@@ -1,0 +1,26 @@
+{
+  "title": "多段 SSH でポート開放されてない自宅のマシンに入って開発する",
+  "closed": true,
+  "archived": false,
+  "created_at": "2023-05-26",
+  "comments": [
+    {
+      "author": "mtkn1",
+      "created_at": "2023-05-26",
+      "body_markdown": "**ポート開放されてない自宅のマシンに外出先から入って開発したい** 。\n\n## 背景・課題\n\n- 自宅に Linux マシン (サーバー) がある\n- 自宅ではデスクトップやラップトップから Linux マシンに VS Code の Remote - SSH で入って開発している\n  - デスクで集中していても、ソファーでリラックスしていても、同じ環境同じ作業状況で開発できるのが良い\n  - 作業を中断するときに、ファイルを共有する目的だけの git commit, push をしなくていい\n- しかし、**自宅のネットワーク環境はポート開放できないので、外で同じように SSH で入って開発できない**\n  - ~~外 (職場) でこっそり開発できるようになる~~\n- **クラウドに踏み台のサーバーを建てて、多段 SSH で自宅のマシンに入って開発する**\n  - クラウドに開発用のサーバーを建てても良いが、ちょっとコストが高い\n  - 踏み台サーバーなら無料 (GCP) ～ 安く建てれる\n\n:::message\nGoogle Cloud Compute Engine の無料枠\nhttps://cloud.google.com/free?hl=ja\n:::",
+      "body_updated_at": "2023-05-26"
+    },
+    {
+      "author": "mtkn1",
+      "created_at": "2023-05-26",
+      "body_markdown": "## 必要なもの・登場人物記号\n\n- 🐧 自宅 Linux マシン\n- ⛅ クラウド VM\n- 💻 クライアント PC\n\n## 事前準備\n\n1. 🐧 と 💻 のそれぞれで鍵を作成する\n\n```bash:🐧 & 💻 Shell\nssh-keygen -t ed25519\n```\n\n2. ⛅ を建てる、1. の公開鍵を設定する\n\n:::message\n任意のクラウドサービスのドキュメントを参照\n:::\n\n3. 🐧 と 💻 のそれぞれで ⛅ に接続する設定ファイル (`~/.ssh/config`) を作成する\n\n```:🐧 & 💻 ~/.ssh/config\nHost *\n    StrictHostKeyChecking no\n    ServerAliveInterval 60\n\nHost cloud-server\n    Hostname xx.xxx.xxx.xxx\n    User username\n```\n\n3. 🐧 と 💻 のそれぞれで ⛅ に通常の SSH 接続ができることを確かめる\n\n```bash:🐧 & 💻\nssh -T cloud-server hostname\n```\n\n`hostname` が表示されたら OK、なんかのエラーになるなら鍵の設定などを見直す。",
+      "body_updated_at": "2023-05-26"
+    },
+    {
+      "author": "mtkn1",
+      "created_at": "2023-05-26",
+      "body_markdown": "## 手順\n\n1. 🐧 から ⛅ へのトンネルを作る\n\n```bash:🐧 Shell\nssh -fnNT -R 2222:localhost:22 cloud-server\n```\n\n`-R` オプションによってリモートポート転送が行われるトンネルが作成される。\nつまり、⛅:2222 宛ての通信が 🐧:22 に転送される。\nこれによってポート開放ができない自宅ネットワークでも、🐧 に SSH 接続が可能になる。\n\n他のオプションによって SSH 接続がバックグラウンドで実行などされる。\nこれによって SSH トンネルがターミナルセッションを抜けても持続する。\n\n:::message\nBing AI より\n\n「ssh -fnNT」は、SSH接続をバックグラウンドで実行するためのオプションです。それぞれのオプションの意味は以下の通りです¹³²。\n\n- -f：sshをバックグラウンドで実行する。\n- -n：標準入力を使わない。\n- -N：リモートシェルを起動しない。\n- -T：擬似TTYを割り当てない。\n\nこのオプションを使用することで、SSH接続をバックグラウンドで実行し、リモートシェルを起動せずに、リモートマシンに対してコマンドを実行することができます。¹³²\n:::\n\n2. 💻 に ⛅ のトンネルを経由して 🐧 へ接続する為の設定をする\n\n```:💻 ~/.ssh/config\nHost ssh-server-tunnel\n    Hostname localhost\n    Port 2222\n    User username\n    ProxyJump cloud-server\n```\n\n`ProxyJump` によって ⛅ を踏み台にして 🐧 に接続できるようになる。\n`Hostname` は ⛅:2222 がそのまま 🐧:22 に繋がっているので localhost のままでよい。\n\n3. 💻 から ⛅ のトンネルを経由して 🐧 へ接続するテストをする\n\n```bash:💻 Shell\nssh -T ssh-server-tunnel hostname\n```\n\n---\n\n🎉\n\nこれで `hostname` が表示されたらトンネルを経由した SSH 接続は成功 \n\nVS Code Remote - SSH などからも接続できるようになる ✅\n\nSSH トンネルについての参考文献\nhttps://robotmoon.com/ssh-tunnels/",
+      "body_updated_at": "2023-05-26"
+    }
+  ]
+}
