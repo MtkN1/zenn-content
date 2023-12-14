@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "preview": "npx zenn preview",
+    "article": "npx zenn new:article",
+    "book": "npx zenn new:book",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "zenn-cli": "^0.1.144"
+    "zenn-cli": "^0.1.150"
   }
 }
