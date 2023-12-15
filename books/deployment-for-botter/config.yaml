@@ -1,7 +1,7 @@
 title: "botter のためのデプロイ入門"
 summary: |-
-  トレード bot をクラウドに自動デプロイする方法を紹介します
-topics: []
+  仮想通貨 bot をクラウドに自動デプロイする方法を紹介します。
+topics: [ "docker", "python", "デプロイ", "botter", "仮想通貨" ]
 published: false
 price: 0 # 有料の場合200〜5000
 # 本に含めるチャプターを順番に並べましょう
