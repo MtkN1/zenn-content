@@ -90,7 +90,7 @@ https://cloud.google.com/free/docs/free-cloud-features?hl=ja#compute
 
 1. BigQuery でデータセット・サブスクリプションの宛先テーブルを作成する
 2. Pub/Sub のトピックと BigQuery サブスクリプションを作成する
-3. Cloud Shell で にプログラムを試す
+3. Cloud Shell でプログラムを試す
 4. Compute Engine にプログラムをデプロイする (任意)
 
 botter の方は AWS しか利用してない方も多いと思うので、Google Cloud アカウントを持っていなければ開設しましょう。 最初は無料枠に加えて 90 日間 $300 分無料トライアルが貰えるのでひとまず上で説明したコストも抑えることができます。
