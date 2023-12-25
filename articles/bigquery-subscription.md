@@ -50,7 +50,7 @@ https://github.com/richwomanbtc/gcpts
     - BigQuery サブスクリプションを利用することでプログラム側では「BigQuery へのインサート処理」を書く代わりに「Pub/Sub への Publish 処理」を書くだけで手軽にデータを投入することができます。
     - また BigQuery サブスクリプションは Publish したデータ以外に自動で時刻などのメタデータを付与してくれます。
 2. Google Cloud **BigQuery**
-    - Google Cloud におけるフルマネージド型の分析データ ウェアハウスです。 **AWS では完全な互換サービスがありません** 。
+    - Google Cloud におけるフルマネージド型の分析データ ウェアハウスです。 AWS では完全な互換サービスがありません 。
     - フルマネージドなので、コストさえ払えば無限にデータを取り込むことが可能です。
     - **JSON 型カラム** の機能があり、柔軟なデータ取り込み・クエリに対応しています。
 3. Google Cloud **Compute Engine**
@@ -90,7 +90,8 @@ https://cloud.google.com/free/docs/free-cloud-features?hl=ja#compute
 
 1. BigQuery でデータセット・サブスクリプションの宛先テーブルを作成する
 2. Pub/Sub のトピックと BigQuery サブスクリプションを作成する
-3. Compute Engine にプログラムをデプロイする
+3. Cloud Shell で にプログラムを試す
+4. Compute Engine にプログラムをデプロイする (任意)
 
 botter の方は AWS しか利用してない方も多いと思うので、Google Cloud アカウントを持っていなければ開設しましょう。 最初は無料枠に加えて 90 日間 $300 分無料トライアルが貰えるのでひとまず上で説明したコストも抑えることができます。
 
