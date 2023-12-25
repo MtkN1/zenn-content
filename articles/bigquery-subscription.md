@@ -1,9 +1,9 @@
 ---
 title: "WebSocket などの JSON を BigQuery に無限に溜め込むサンプル"
-emoji: "🌊"
+emoji: "🛢️"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: [ "bigquery", "websocket", "python", "botter", "仮想通貨" ]
-published: false
+published: true
 ---
 
 本記事は 仮想通貨botter Advent Calendar 2023 25 日目の記事です。
