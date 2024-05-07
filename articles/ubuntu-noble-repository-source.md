@@ -8,7 +8,7 @@ published: false
 
 # TL;DR
 
-deb822 スタイル形式の `deb-src` (ソースコードリポジトリ) を有効するワンライナーです。
+deb822 スタイル形式の `deb-src` (ソースコードリポジトリ) を有効するワンライナーです 🚀
 
 ```bash:Ubuntu 24.04
 sudo apt-get update \
@@ -17,7 +17,7 @@ sudo apt-get update \
     && sudo apt-get update
 ```
 
-Ubuntu 24.04 からはパッケージリポジトリの `deb-src` (ソースコードリポジトリ) を有効にするのに `add-apt-repository -s` コマンドが効かなくなってしまったので代替として作りました。
+Ubuntu 24.04 からはパッケージリポジトリのソースコードリポジトリ (`deb-src`) を有効にするのに `add-apt-repository -s` コマンドが効かなくなってしまったので代替として書いてみました。
 
 ✅ `sed` や `nano` コマンドによる独自の編集手段を使わない
 ✅ `python3-software-properties` パッケージによる標準機能を使う
@@ -85,7 +85,7 @@ https://git.launchpad.net/software-properties/tree/add-apt-repository?id=78d9407
 
 兎にも角にも Python をビルドするのに必要な `deb-src` 有効化ですが、 `add-apt-repository -s` が機能しなくなって有効化できなくなってしまいました。
 
-代替方法としては `sed` コマンドで置換したり、`nano` コマンドで手動編集することです。 置換も手動編集も非常に簡単ではあるのですが、個人的にはあまり好みません。 私は安全で再現性がありかつ機械的にセットアップできる方法を実行したいのです。
+代替方法としては `sed` コマンドで置換したり、`nano` コマンドで手動編集することです。 置換も手動編集も非常に簡単ではあるのですが、個人的にはあまり好みません。 私は標準機能で安全かつ機械的にセットアップできる方法を実行したいのです。
 
 # ソフトウェアとアップデート (Software & Updates)
 
@@ -95,7 +95,9 @@ https://git.launchpad.net/software-properties/tree/add-apt-repository?id=78d9407
 
 ![](https://storage.googleapis.com/zenn-user-upload/c93080df63f5-20240507.png)
 
-Ubuntu **24.04** では `add-apt-repository` は機能しないのに、GUI のこのボタンは機能するのか？ 🤔 と思って Desktop の VM を作成して試してみたところ **GUI アプリだと deb822 の deb-src を有効にするのが機能するではないですか！**
+Ubuntu **24.04** では `add-apt-repository` は機能しないのに、GUI のこのボタンは機能するのか？ 🤔 と思って Desktop の VM を作成して試してみました。
+
+そうすると **GUI アプリだと deb822 の deb-src を有効にするのが機能するではないですか！**
 
 つまり GUI が呼び出している機能を部分的に呼び出せれば、CLI では `add-apt-repository` の代替として利用できるということです。
 
@@ -105,7 +107,7 @@ https://packages.ubuntu.com/source/noble/software-properties
 
 (`add-apt-repository` コマンドが入っている `software-properties-common` パッケージの親でもあるので追跡が比較的容易でした)
 
-幸いなことに全てが Python なので、気合でソースを追ったところ deb822 の `deb-src` を有効にする **該当の関数を発見しました** 🙌🙌
+幸いなことに全てが Python なので、ソースを気合で追ったところ deb822 の `deb-src` を有効にする **該当の関数を発見しました** 🙌🙌
 
 https://git.launchpad.net/software-properties/tree/softwareproperties/SoftwareProperties.py?id=78d9407f583d1ea0baea619ee5fc82a2df81b8da#n404
 
@@ -125,7 +127,7 @@ REPL で呼び出すならこんな感じです。
 >>> s.disable_source_code_sources()
 ```
 
-CLI 環境の Ubuntu に戻って `enable_source_code_sources()` メソッドを実行すると、しっかり `deb-scr` を有効にしてくれるのを確認しました。 このメソッドだけで保存までされるので `save_sourceslist()` のようなメソッドを呼び出す必要はなさそうです。 これを活用すればほぼ正式な手順で `add-apt-repository -s` の代替になってくれそうです！
+CLI 環境の Ubuntu に戻って `enable_source_code_sources()` メソッドを実行すると、しっかり `deb-scr` を有効にしてくれるのを確認しました。 このメソッドだけで保存までされるので `save_sourceslist()` のようなメソッドを呼び出す必要はなさそうです。 これを活用すれば標準機能で `add-apt-repository -s` の代替になってくれそうです！
 
 # One-liner
 
