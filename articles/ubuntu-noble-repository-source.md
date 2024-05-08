@@ -2,7 +2,7 @@
 title: "Ubuntu 24.04 の標準機能で deb822 の deb-src を有効にする"
 emoji: "🍦"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["linux", "ubuntu", "python", "apt"]
+topics: ["linux", "ubuntu", "wsl", "python", "apt"]
 published: true
 ---
 
