@@ -12,12 +12,12 @@ pybotters 1.5 をリリースしました 🎉
 
 https://github.com/pybotters/pybotters/releases/tag/v1.5.0
 
-今回の更新には以下の取引所サポートが追加されました。
+今回の更新では以下の取引所サポートが追加されました。
 
 * OKJ (旧 OKCoinJapan) の API (REST/WebSocket) 認証サポート
 * BitTrade (旧 Huobi Japan) の API (REST/WebSocket) 認証サポート
 
-この記事では上記二つの取引所で利用可能になった Private API 呼び出しのサンプルコードを簡単に紹介します。
+この記事では利用可能になった上記二つの取引所での Private API 呼び出しのサンプルコードを簡単にご紹介します。
 
 :::message
 サンプルコードでは API 認証情報を `os.getenv()` にて環境変数から取得を試みます。 実行する場合は、該当の環境変数を設定するか `default` 引数の箇所に直書きしてください。
@@ -34,20 +34,20 @@ $ pipx run okj_http.py
 
 # OKJ
 
-API Docs: [https://dev.okcoin.jp/en/]()
+API Docs: https://dev.okcoin.jp/en/
 
-OKJ は API 認証情報としてキー、シークレットに加えてパスフレーズの三つが必要な取引所です。 本家 OKX と同じ仕様ですね。
+OKJ は API 認証情報としてキー、シークレットに加えてパスフレーズの三つが必要な取引所です。 本家 OKX と同じ仕様ですね。 ただ API 仕様は所感としては本家 OKX とは似てるようで似てない感じです。
 
 ## REST API
 
-残高を取得するサンプルです。 今回の更新によって pybotters によってリクエストの署名が自動で処理されます。
+[残高を取得する](https://dev.okcoin.jp/en/#account-information) サンプルです。 今回の更新によって pybotters によってリクエストの署名が自動で処理されます。
 リクエストの方法的にも基本的な形ですね。 パスフレーズが必要な点以外、他の取引所と比べても大きく違う仕様はありませんね。
 
 @[gist](https://gist.github.com/MtkN1/3af5b7fa5ae00d9999d260f83ebb680d?file=okj_http.py)
 
 ## WebSocket API
 
-WebSocket でユーザーのスポットアカウント情報を取得するサンプルです。 接続開始時に pybotters によって自動で署名メッセージが送信されます。
+WebSocket で [ユーザーのスポットアカウント情報を取得する](https://dev.okcoin.jp/en/#spot_ws-account) サンプルです。 接続開始時に pybotters によって自動で署名メッセージが送信されます。
 
 今回の pybotters の更新とは直接は無関係ではありますが OKJ には [WebSocket メッセージの Deflate 圧縮仕様](https://dev.okcoin.jp/en/#spot_ws-general) があり、少しややこしいので注意が必要です:
 
@@ -60,18 +60,18 @@ WebSocket でユーザーのスポットアカウント情報を取得するサ�
 
 API Docs: https://api-doc.bittrade.co.jp/
 
-BitTrade の API 認証情報は従来通りよくあるキー、シークレットの二種類タイプですね。
+BitTrade の API 認証情報は従来通りよくあるキー、シークレットの二種類タイプですね。 ここの特徴としては数少ない販売所の API があるのが面白いです。
 
 ## REST API
 
-残高を取得するサンプルです。 同様に pybotters によってリクエストの署名が自動で処理されます。
+[残高を取得する](https://api-doc.bittrade.co.jp/#c617e5c5d4) サンプルです。 同様に pybotters によってリクエストの署名が自動で処理されます。
 これも pybottesr 自体とは関係なく BitTrade 側の仕様ですが、一発で残高を取得できないのは面倒ですね。
 
 @[gist](https://gist.github.com/MtkN1/3af5b7fa5ae00d9999d260f83ebb680d?file=bittrade_http.py)
 
 ## WebSocket API
 
-WebSocket でユーザーのアカウント情報を取得するサンプルです。 接続開始時に pybotters によって自動で署名メッセージが送信されます。 こちらは特殊な仕様はないですね。
+WebSocket で [ユーザーのアカウント情報を取得する](https://api-doc.bittrade.co.jp/#c0019a0077) サンプルです。 接続開始時に pybotters によって自動で署名メッセージが送信されます。 こちらは特殊な仕様はないですね。
 
 @[gist](https://gist.github.com/MtkN1/3af5b7fa5ae00d9999d260f83ebb680d?file=bittrade_ws.py)
 
@@ -85,7 +85,7 @@ https://gist.github.com/MtkN1/3af5b7fa5ae00d9999d260f83ebb680d
 
 ---
 
-DataStore については未実装です。 現状需要があるか分かりませんが、コントリビュートについては歓迎しています。
+DataStore については未実装です。 現状需要があるか分からないので未定ではありますが、コントリビュートは歓迎しています。
 
 ---
 
