@@ -3,7 +3,7 @@ title: "pybotters 1.5 ハイライト"
 emoji: "📝"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["python", "pybotters", "oss"]
-published: false
+published: true
 ---
 
 # TL;DR
