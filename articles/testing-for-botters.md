@@ -2,8 +2,8 @@
 title: "botter のためのテスト入門"
 emoji: "📝"
 type: "tech" # tech: 技術記事 / idea: アイデア
-topics: ["python", "pytest", "pybotters"]
-published: false
+topics: ["python", "pytest", "botter", "仮想通貨"]
+published: true
 ---
 
 この記事は「仮想通貨botter Advent Calendar 2024」の 14 日目の記事です。
