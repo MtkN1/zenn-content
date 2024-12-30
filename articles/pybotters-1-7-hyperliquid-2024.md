@@ -3,7 +3,7 @@ title: "pybotters の Hyperliquid サポートと 2024 年まとめ"
 emoji: "🐍"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["python", "OSS", "pybotters"]
-published: false
+published: true
 ---
 
 # TL;DR
@@ -114,10 +114,6 @@ https://pybotters.readthedocs.io/ja/stable/generated/pybotters.HyperliquidDataSt
 未対応の Issue トラッカーはこちらです:
 
 https://github.com/pybotters/pybotters/issues/352
-
-pybotters 1.7 の完全な変更履歴はこちらです:
-
-https://github.com/pybotters/pybotters/releases/tag/v1.7.0
 
 # pybotters in 2024
 
